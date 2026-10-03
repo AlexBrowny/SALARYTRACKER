@@ -1,5 +1,3 @@
-import sqlite3 from 'sqlite3';
-import { open } from 'sqlite';
 import { createClient } from '@libsql/client';
 import { DB_PATH, TURSO_DATABASE_URL, TURSO_AUTH_TOKEN } from '../config/index.js';
 
@@ -68,6 +66,8 @@ export async function initDb() {
         db = new LibSqlAdapter(client);
       } else {
         console.log(`📁 Подключение к локальной базе SQLite: ${DB_PATH}`);
+        const { default: sqlite3 } = await import('sqlite3');
+        const { open } = await import('sqlite');
         db = await open({
           filename: DB_PATH,
           driver: sqlite3.Database,

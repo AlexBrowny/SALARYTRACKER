@@ -1,0 +1,24 @@
+# dependencies
+node_modules/
+client/node_modules/
+
+# build
+dist/
+client/dist/
+
+# environment variables
+.env
+.env.local
+.env.*.local
+*.env
+
+# logs
+*.log
+npm-debug.log*
+
+# Vercel
+.vercel
+
+# OS
+.DS_Store
+Thumbs.db

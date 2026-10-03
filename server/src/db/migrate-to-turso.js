@@ -12,7 +12,8 @@ const __dirname = path.dirname(__filename);
 dotenv.config();
 
 const DB_PATH = process.env.DB_PATH || path.join(__dirname, '../../salary_tracker.db');
-const TURSO_DATABASE_URL = process.env.TURSO_DATABASE_URL || process.env.LIBSQL_URL;
+const rawUrl = process.env.TURSO_DATABASE_URL || process.env.LIBSQL_URL || '';
+const TURSO_DATABASE_URL = rawUrl.replace(/^libsql:\/\//, 'https://');
 const TURSO_AUTH_TOKEN = process.env.TURSO_AUTH_TOKEN || process.env.LIBSQL_AUTH_TOKEN;
 
 async function migrate() {

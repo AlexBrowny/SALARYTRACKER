@@ -12,8 +12,9 @@ const __dirname = path.dirname(__filename);
 // Порт сервера
 export const PORT = process.env.PORT || 3001;
 
-// Настройки Turso / LibSQL
-export const TURSO_DATABASE_URL = process.env.TURSO_DATABASE_URL || process.env.LIBSQL_URL || '';
+// Настройки Turso / LibSQL (автоматически используем https:// протокол для надёжного соединения через фаерволы)
+const rawTursoUrl = process.env.TURSO_DATABASE_URL || process.env.LIBSQL_URL || '';
+export const TURSO_DATABASE_URL = rawTursoUrl.replace(/^libsql:\/\//, 'https://');
 export const TURSO_AUTH_TOKEN = process.env.TURSO_AUTH_TOKEN || process.env.LIBSQL_AUTH_TOKEN || '';
 
 // Путь к локальному файлу базы данных SQLite (используется как резервный при отсутствии Turso)
